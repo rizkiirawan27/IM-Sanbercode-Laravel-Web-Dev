@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\CastsController;
+use App\Http\Controllers\CastController;
+use App\Http\Controllers\GenresController;
+use App\Http\Controllers\FilmsController;
+use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [DashboardController::class, 'index']);
 
@@ -14,29 +18,21 @@ Route::get('/table', function(){
     return view ('page.table');
 });
 
-//CRUD Casts
+Route::middleware(['auth'])->group(function () {
+    //CRUD Casts
+    Route::resource('casts', CastController::class);
 
-// C => Create Data
-// Route menuju form halaman create casts
-Route::get('/casts/create', [CastsController::class, 'create']);
+    //Edit-Update Users
+    Route::get('/user/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
 
-//Route untuk insert data ke database
-Route::post('/casts', [CastsController::class, 'store']);
+    Route::post('/reviews/{films_id}',[ReviewsController::class, 'store']);
+});
 
-// R => Read Data
-// Route yg menampilkan data dari db ke halaman browser
-Route::get('/casts', [CastsController::class, 'index']);
+    //CRUD Genres
+    Route::resource('genres', GenresController::class);
 
-// Route yg menampilkan data berdasarkan id
-Route::get('/casts/{casts_id}', [CastsController::class, 'show']);
-
-// U => Update Data
-// Route yang mengarahkan ke form update data berdasarkan id
-Route::get('/casts/{casts_id}/edit', [CastsController::class, 'edit']);
-
-// Route yang menyimpan data update berdasarkan id
-Route::put('/casts/{casts_id}', [CastsController::class, 'update']);
-
-// D => Delete Data
-// Route yang menghapus data berdasarkan id
-Route::delete('casts/{casts_id}', [CastsController::class, 'destroy']);
+    //CRUD Films
+    Route::resource('films', FilmsController::class);
+    
+Auth::routes();

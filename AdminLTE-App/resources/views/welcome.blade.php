@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('headtitle')
+    Review-Apps | Dashboard
+@endsection
 
 @section('title')
     Halaman Utama

@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('headtitle')
+    Review-Apps | Edit Casts
+@endsection
+
 @section('title')
     Halaman Edit Casts
 @endsection
@@ -31,6 +35,7 @@
       <label>Bio</label>
       <textarea name="bio" class="form-control"rows="5">{{old('bio', $casts->bio)}}</textarea>
     </div>
+    <a href="/casts/" class="btn btn-secondary">Kembali</a>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 @endsection

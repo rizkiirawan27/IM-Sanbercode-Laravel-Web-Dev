@@ -1,15 +1,14 @@
 @extends('layouts.master')
-
 @section('headtitle')
-    Review-Apps | Add Casts
+    Review-Apps | Add Genre
 @endsection
 
 @section('title')
-    Halaman Create Casts
+    Halaman Create Genres
 @endsection
 
 @section('content')
-<form action="{{route('casts.store')}}" method="POST">
+<form action="{{route('genres.store')}}" method="POST">
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -20,21 +19,11 @@
     </div>
     @endif
     @csrf
-    <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group">
         <label>Name</label>
         <input type="name" name="name" class="form-control" value="{{old('name')}}">
       </div>
-      <div class="form-group col-md-6">
-        <label>Age</label>
-        <input type="age" name="age" class="form-control" value="{{old('age')}}">
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Bio</label>
-      <textarea name="bio" class="form-control"rows="5">{{old('bio')}}</textarea>
-    </div>
-    <a href="/casts/" class="btn btn-secondary">Kembali</a>
+      <a href="/genres/" class="btn btn-secondary">Kembali</a>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 @endsection
